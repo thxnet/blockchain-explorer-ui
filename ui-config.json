@@ -1,0 +1,105 @@
+{
+  "mainnet-rootchain": {
+    "groupName": "THXNET. Mainnet",
+    "name": "Rootchain",
+    "image": "thxnet-rootchain.png",
+    "substrateRpcUrlArray": ["wss://node.mainnet.thxnet.org/archive-001/ws"],
+    "explorerWsUrlArray": ["wss://explorer.mainnet.thxnet.org/graphql-ws"]
+  },
+  "mainnet-thx": {
+    "name": "thx!",
+    "image": "thxnet-thx.png",
+    "relayChain": "mainnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.thx.mainnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.thx.mainnet.thxnet.org/graphql-ws"]
+  },
+  "mainnet-lmt": {
+    "name": "LMT",
+    "image": "thxnet-lmt.png",
+    "relayChain": "mainnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.lmt.mainnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.lmt.mainnet.thxnet.org/graphql-ws"]
+  },
+  "mainnet-mirrored-body": {
+    "name": "Mirrored Body",
+    "image": "thxnet-mb.png",
+    "relayChain": "mainnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.mirrored-body.mainnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": [
+      "wss://explorer.mirrored-body.mainnet.thxnet.org/graphql-ws"
+    ]
+  },
+  "mainnet-avatect": {
+    "name": "AVATECT",
+    "image": "thxnet-avatect.png",
+    "relayChain": "mainnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.avatect.mainnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": [
+      "wss://explorer.avatect.mainnet.thxnet.org/graphql-ws"
+    ]
+  },
+  "testnet-rootchain": {
+    "groupName": "THXNET. Testnet",
+    "name": "Rootchain",
+    "image": "thxnet-rootchain.png",
+    "substrateRpcUrlArray": ["wss://node.testnet.thxnet.org/archive-001/ws"],
+    "explorerWsUrlArray": ["wss://explorer.testnet.thxnet.org/graphql-ws"]
+  },
+  "testnet-thx": {
+    "name": "thx!",
+    "image": "thxnet-thx.png",
+    "relayChain": "testnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.thx.testnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.thx.testnet.thxnet.org/graphql-ws"]
+  },
+  "testnet-lmt": {
+    "name": "LMT",
+    "image": "thxnet-lmt.png",
+    "relayChain": "testnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.lmt.testnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.lmt.testnet.thxnet.org/graphql-ws"]
+  },
+  "testnet-sand": {
+    "name": "SAND",
+    "image": "thxnet-sand.png",
+    "relayChain": "testnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.sand.testnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.sand.testnet.thxnet.org/graphql-ws"]
+  },
+  "testnet-izutsuya": {
+    "name": "#Z28",
+    "image": "thxnet-izutsuya.png",
+    "relayChain": "testnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.izutsuya.testnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": [
+      "wss://explorer.izutsuya.testnet.thxnet.org/graphql-ws"
+    ]
+  },
+  "testnet-mirrored-body": {
+    "name": "Mirrored Body Test",
+    "image": "thxnet-mb.png",
+    "relayChain": "testnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.mirrored-body-test.testnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": [
+      "wss://explorer.mirrored-body-test.testnet.thxnet.org/graphql-ws"
+    ]
+  }
+}
