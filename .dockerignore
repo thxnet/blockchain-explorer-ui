@@ -1,3 +1,12 @@
 **/node_modules
 **/.git
 **/dist
+**/.angular
+**/.github
+**/*.md
+**/LICENSE
+**/.editorconfig
+**/.eslintrc*
+**/karma.conf.js
+**/tsconfig.spec.json
+**/scripts

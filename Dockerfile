@@ -1,20 +1,14 @@
-# STAGE 1: layered build of PolkADAPT submodule and Polkascan Explorer application.
+# STAGE 1: Build PolkADAPT submodule and Explorer UI application
 
-FROM node:lts as builder
-
-# The application depends on PolkADAPT, so we have to install and build PolkADAPT first.
+FROM node:20-bookworm AS builder
 
 WORKDIR /app/polkadapt
-
-# Copy all PolkADAPT package.json files and install packages.
 
 COPY polkadapt/package.json .
 RUN npm i
 
 COPY polkadapt/projects/core/package.json projects/core/package.json
 RUN cd projects/core && npm i
-
-# We build the core libary first, because PolkADAPT adapters depend on it.
 
 COPY polkadapt/angular.json polkadapt/tsconfig.json ./
 COPY polkadapt/projects/core projects/core
@@ -32,33 +26,34 @@ RUN cd projects/coingecko && npm i
 COPY polkadapt/projects/subsquid/package.json projects/subsquid/package.json
 RUN cd projects/subsquid && npm i
 
-# Copy the rest of the files and build all PolkADAPT libraries.
-
 COPY polkadapt .
 RUN npm exec ng build -- --configuration production substrate-rpc
 RUN npm exec ng build -- --configuration production polkascan-explorer
 RUN npm exec ng build -- --configuration production coingecko
 RUN npm exec ng build -- --configuration production subsquid
 
-# Install the application dependencies.
-
+# Main App
 WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
 
-COPY package.json .
-RUN npm i
+COPY angular.json tsconfig.json tsconfig.app.json tsconfig.worker.json ./
+COPY src/ src/
 
-# Copy the rest of the files and build the application.
-COPY . .
+RUN cd node_modules/@polkadapt && rm -rf * \
+    && ln -s ../../../polkadapt/dist/core \
+    && ln -s ../../../polkadapt/dist/substrate-rpc \
+    && ln -s ../../../polkadapt/dist/polkascan-explorer \
+    && ln -s ../../../polkadapt/dist/coingecko \
+    && ln -s ../../../polkadapt/dist/subsquid
 
 ARG ENV_CONFIG=production
 ENV ENV_CONFIG=$ENV_CONFIG
-
 RUN npm exec ng build -- --configuration ${ENV_CONFIG}
 
+# STAGE 2: Nginx runtime
 
-# STAGE 2: Nginx setup to serve the application.
-
-FROM nginx:stable-alpine
+FROM nginx:1.26-alpine
 LABEL description="Container image for THXNET." \
     io.thxnet.image.type="final" \
     io.thxnet.image.authors="contact@thxlab.io" \
@@ -66,32 +61,14 @@ LABEL description="Container image for THXNET." \
     io.thxnet.image.description="THXNET.: Blockchain Explorer Frontend" \
     org.opencontainers.image.source="https://github.com/thxnet/blockchain-explorer-ui"
 
-# Allow for various nginx proxy configuration.
 ARG NGINX_CONF=nginx/explorer-ui.conf
 ENV NGINX_CONF=$NGINX_CONF
 
-# Remove default nginx configs.
 RUN rm -rf /etc/nginx/conf.d/*
-
-# Copy the nginx config.
 COPY ${NGINX_CONF} /etc/nginx/conf.d/
 
-# Remove default nginx website.
 RUN rm -rf /usr/share/nginx/html/*
-
-# Copy build artifacts from ‘builder’ stage to default nginx public folder.
 COPY --from=builder /app/dist/explorer-ui /usr/share/nginx/html
 
-# Copy config.json file for runtime environment variables.
-# ARG CONFIG_JSON=src/assets/config.json
-# ENV CONFIG_JSON=$CONFIG_JSON
-# COPY $CONFIG_JSON /usr/share/nginx/html/assets/config.json
-
-# Copy privacy-policy.html file.
-# ARG PRIVACY_POLICY_HTML=src/assets/privacy-policy.html
-# ENV PRIVACY_POLICY_HTML=$PRIVACY_POLICY_HTML
-# COPY $PRIVACY_POLICY_HTML /usr/share/nginx/html/assets/privacy-policy.html
-
 EXPOSE 80
-
-CMD ["/bin/sh",  "-c",  "exec nginx -g 'daemon off;'"]
+CMD ["/bin/sh", "-c", "exec nginx -g 'daemon off;'"]
