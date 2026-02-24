@@ -40,12 +40,12 @@ RUN npm ci
 COPY angular.json tsconfig.json tsconfig.app.json tsconfig.worker.json ./
 COPY src/ src/
 
-RUN cd node_modules/@polkadapt && rm -rf * \
-    && ln -s ../../../polkadapt/dist/core \
-    && ln -s ../../../polkadapt/dist/substrate-rpc \
-    && ln -s ../../../polkadapt/dist/polkascan-explorer \
-    && ln -s ../../../polkadapt/dist/coingecko \
-    && ln -s ../../../polkadapt/dist/subsquid
+RUN rm -rf node_modules/@polkadapt && mkdir -p node_modules/@polkadapt \
+    && cp -r /app/polkadapt/dist/core node_modules/@polkadapt/ \
+    && cp -r /app/polkadapt/dist/substrate-rpc node_modules/@polkadapt/ \
+    && cp -r /app/polkadapt/dist/polkascan-explorer node_modules/@polkadapt/ \
+    && cp -r /app/polkadapt/dist/coingecko node_modules/@polkadapt/ \
+    && cp -r /app/polkadapt/dist/subsquid node_modules/@polkadapt/
 
 ARG ENV_CONFIG=production
 ENV ENV_CONFIG=$ENV_CONFIG
