@@ -24,17 +24,6 @@
     ],
     "explorerWsUrlArray": ["wss://explorer.lmt.mainnet.thxnet.org/graphql-ws"]
   },
-  "mainnet-mirrored-body": {
-    "name": "Mirrored Body",
-    "image": "thxnet-mb.png",
-    "relayChain": "mainnet-rootchain",
-    "substrateRpcUrlArray": [
-      "wss://node.mirrored-body.mainnet.thxnet.org/archive-001/ws"
-    ],
-    "explorerWsUrlArray": [
-      "wss://explorer.mirrored-body.mainnet.thxnet.org/graphql-ws"
-    ]
-  },
   "mainnet-avatect": {
     "name": "AVATECT",
     "image": "thxnet-avatect.png",
@@ -45,6 +34,15 @@
     "explorerWsUrlArray": [
       "wss://explorer.avatect.mainnet.thxnet.org/graphql-ws"
     ]
+  },
+  "mainnet-ecq": {
+    "name": "ECQ Security Evidence Chain",
+    "image": "thxnet-ecq.png",
+    "relayChain": "mainnet-rootchain",
+    "substrateRpcUrlArray": [
+      "wss://node.ecq.mainnet.thxnet.org/archive-001/ws"
+    ],
+    "explorerWsUrlArray": ["wss://explorer.ecq.mainnet.thxnet.org/graphql-ws"]
   },
   "testnet-rootchain": {
     "groupName": "THXNET. Testnet",
@@ -91,15 +89,13 @@
       "wss://explorer.izutsuya.testnet.thxnet.org/graphql-ws"
     ]
   },
-  "testnet-mirrored-body": {
-    "name": "Mirrored Body Test",
-    "image": "thxnet-mb.png",
+  "testnet-ecq": {
+    "name": "ECQ Testnet",
+    "image": "thxnet-ecq.png",
     "relayChain": "testnet-rootchain",
     "substrateRpcUrlArray": [
-      "wss://node.mirrored-body-test.testnet.thxnet.org/archive-001/ws"
+      "wss://node.ecq.testnet.thxnet.org/archive-001/ws"
     ],
-    "explorerWsUrlArray": [
-      "wss://explorer.mirrored-body-test.testnet.thxnet.org/graphql-ws"
-    ]
+    "explorerWsUrlArray": ["wss://explorer.ecq.testnet.thxnet.org/graphql-ws"]
   }
 }
