@@ -1,6 +1,6 @@
 # STAGE 1: Build PolkADAPT submodule and Explorer UI application
 
-FROM node:20-bookworm AS builder
+FROM node:lts AS builder
 
 WORKDIR /app/polkadapt
 
@@ -53,7 +53,7 @@ RUN npm exec ng build -- --configuration ${ENV_CONFIG}
 
 # STAGE 2: Nginx runtime
 
-FROM nginx:1.26-alpine
+FROM nginx:stable-alpine
 LABEL description="Container image for THXNET." \
     io.thxnet.image.type="final" \
     io.thxnet.image.authors="contact@thxlab.io" \
