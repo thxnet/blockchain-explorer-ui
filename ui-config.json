@@ -40,7 +40,7 @@
     "image": "thxnet-ecq.png",
     "relayChain": "mainnet-rootchain",
     "substrateRpcUrlArray": [
-      "wss://node.ecq.mainnet.thxnet.org/archive-001/ws"
+      "wss://node.ecq.mainnet.thxnet.org/archive-002/ws"
     ],
     "explorerWsUrlArray": ["wss://explorer.ecq.mainnet.thxnet.org/graphql-ws"]
   },
